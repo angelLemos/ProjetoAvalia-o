@@ -1,12 +1,13 @@
 package br.com.rsinet.hub_tdd.driver;
 
-import org.openqa.selenium.Dimension;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class DriverFactory {
 
-	private static WebDriver driver;
+	static WebDriver driver;
 
 	private DriverFactory() {
 	}
@@ -14,7 +15,9 @@ public class DriverFactory {
 	public static WebDriver getDriver() {
 		if (driver == null) {
 			driver = new ChromeDriver();
-			driver.manage().window().setSize(new Dimension(1200, 765));
+			// driver.manage().window().maximize();
+			driver.get("http://www.advantageonlineshopping.com/#/");
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		}
 		return driver;
 	}
