@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="12977" started-at="2020-01-13T16:55:01 BRST" finished-at="2020-01-13T16:55:14 BRST">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="12977" started-at="2020-01-13T16:55:01 BRST" finished-at="2020-01-13T16:55:14 BRST">
+      <class name="br.com.rsinet.hub_tdd.teste.ConsultarProdutoCampoTeste">
+        <test-method status="PASS" signature="Inicializa()[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultarProdutoCampoTeste@1b68ddbd]" name="Inicializa" is-config="true" duration-ms="6724" started-at="2020-01-13T16:55:01 BRST" finished-at="2020-01-13T16:55:08 BRST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Inicializa -->
+        <test-method status="PASS" signature="pesquisaProdutoCampo()[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultarProdutoCampoTeste@1b68ddbd]" name="pesquisaProdutoCampo" duration-ms="5579" started-at="2020-01-13T16:55:08 BRST" finished-at="2020-01-13T16:55:14 BRST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- pesquisaProdutoCampo -->
+        <test-method status="PASS" signature="finaliza()[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultarProdutoCampoTeste@1b68ddbd]" name="finaliza" is-config="true" duration-ms="630" started-at="2020-01-13T16:55:14 BRST" finished-at="2020-01-13T16:55:14 BRST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- finaliza -->
+      </class> <!-- br.com.rsinet.hub_tdd.teste.ConsultarProdutoCampoTeste -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

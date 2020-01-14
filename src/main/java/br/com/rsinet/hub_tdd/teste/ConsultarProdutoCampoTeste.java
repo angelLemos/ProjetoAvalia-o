@@ -3,11 +3,12 @@ package br.com.rsinet.hub_tdd.teste;
 import static br.com.rsinet.hub_tdd.driver.DriverFactory.fecharDriver;
 import static br.com.rsinet.hub_tdd.driver.DriverFactory.getDriver;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import br.com.rsinet.hub_tdd.pages.TelaInicialPage;
 import br.com.rsinet.hub_tdd.pages.TelaListaProdutosPage;
@@ -18,10 +19,9 @@ public class ConsultarProdutoCampoTeste {
 	TelaInicialPage telaInicial;
 	TelaListaProdutosPage telaListaProdutos;
 
-	@Before
+	@BeforeMethod
 
 	public void Inicializa() {
-
 		driver = getDriver();
 
 		telaInicial = PageFactory.initElements(driver, TelaInicialPage.class);
@@ -35,7 +35,7 @@ public class ConsultarProdutoCampoTeste {
 
 	}
 
-	@After
+	@AfterMethod
 	public void finaliza() {
 		fecharDriver();
 	}
