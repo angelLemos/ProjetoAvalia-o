@@ -12,7 +12,7 @@ public class DriverFactory {
 	private DriverFactory() {
 	}
 
-	public static WebDriver getDriver() {
+	public static WebDriver inicializarDriver() {
 		if (driver == null) {
 			driver = new ChromeDriver();
 			// driver.manage().window().maximize();

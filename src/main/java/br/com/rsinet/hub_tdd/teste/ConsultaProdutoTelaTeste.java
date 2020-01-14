@@ -2,7 +2,7 @@ package br.com.rsinet.hub_tdd.teste;
 
 import static br.com.rsinet.hub_tdd.driver.DriverFactory.fecharDriver;
 
-import static br.com.rsinet.hub_tdd.driver.DriverFactory.getDriver;
+import static br.com.rsinet.hub_tdd.driver.DriverFactory.inicializarDriver;
 
 //import org.junit.After;
 //import org.junit.Before;
@@ -26,7 +26,7 @@ public class ConsultaProdutoTelaTeste {
 
 	public void Inicializa() {
 
-		driver = getDriver();
+		driver = inicializarDriver();
 
 		telaInicial = PageFactory.initElements(driver, TelaInicialPage.class);
 		telaListaProdutos = PageFactory.initElements(driver, TelaListaProdutosPage.class);

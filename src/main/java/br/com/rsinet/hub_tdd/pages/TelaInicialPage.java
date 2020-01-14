@@ -49,10 +49,8 @@ public class TelaInicialPage {
 	public void PesquisarProdutoCampo(String nomeProduto) {
 		// Busca produto por pesquisa
 
-	    lnkPesquisaProdutoCampo.sendKeys(nomeProduto);
+		lnkPesquisaProdutoCampo.sendKeys(nomeProduto);
 		lnkPesquisaProdutoCampo.sendKeys(Keys.RETURN);
-
-
 
 	}
 

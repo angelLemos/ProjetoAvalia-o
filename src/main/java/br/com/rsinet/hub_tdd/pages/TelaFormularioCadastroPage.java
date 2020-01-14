@@ -1,14 +1,15 @@
 package br.com.rsinet.hub_tdd.pages;
 
+import java.io.IOException;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.ui.Select;
 
 public class TelaFormularioCadastroPage {
 
-	final WebDriver driver;
+	private WebDriver driver;
 
 	@FindBy(how = How.NAME, using = "usernameRegisterPage")
 	public WebElement txtUsuario;
@@ -52,34 +53,25 @@ public class TelaFormularioCadastroPage {
 	@FindBy(how = How.ID, using = "register_btnundefined")
 	public WebElement btnRegistrar;
 
-	public TelaFormularioCadastroPage(WebDriver driver)
-
-	{
-		this.driver = driver;
-
-	}
-
-	public void PreencherDetalhesDaConta(String usuario, String email, String senha, String confirmaSenha) {
-		txtUsuario.sendKeys(usuario);
+	public void PreencherDetalhesDaConta(String userName, String email, String senha, String confirmSenha)
+			throws IOException {
+		txtUsuario.sendKeys(userName);
 		txtEmail.sendKeys(email);
 		txtSenha.sendKeys(senha);
-		txtConfirmaSenha.sendKeys(confirmaSenha);
+		txtConfirmaSenha.sendKeys(confirmSenha);
 
 	}
 
-	public void PreencherDetalhesPessoais(String nome, String sobrenome, String telefone) {
+	public void PreencherDetalhesPessoais(String nome, String sobrenome, String telefone) throws IOException {
 		txtNome.sendKeys(nome);
 		txtSobrenome.sendKeys(sobrenome);
 		txtTelefone.sendKeys(telefone);
 
 	}
 
-	public void PreencherEndereco(String cidade, String endereco, String estado, String cep) {
-
-		// Seleciona Pais
-		Select select = new Select(cbxPais);
-		select.selectByVisibleText("Brazil");
-
+	public void PreencherEndereco(String pais, String cidade, String endereco, String estado, String cep)
+			throws IOException {
+		cbxPais.sendKeys(pais);
 		txtCidade.sendKeys(cidade);
 		txtEndereco.sendKeys(endereco);
 		txtEstado.sendKeys(estado);
