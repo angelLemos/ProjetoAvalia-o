@@ -11,15 +11,13 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
 public class RelatorioDeValidacoes {
-	
+
 	private RelatorioDeValidacoes() {
 
 	}
-	
+
 	@Test
 	public void validacaoTeste() throws IOException {
-
-		System.out.println("Cadastro realizado com sucesso!");
 
 		ExtentHtmlReporter reporte = new ExtentHtmlReporter("./Reports/projeto.html");
 
@@ -27,20 +25,22 @@ public class RelatorioDeValidacoes {
 
 		extensao.attachReporter(reporte);
 
-		ExtentTest logger = extensao.createTest("Cadastrado com sucesso!");
-		logger.log(Status.INFO, "Cadastro realizado com sucesso!");
+		ExtentTest logger = extensao.createTest("Cadastro realizado com sucesso!");
+		logger.log(Status.INFO, "Usuário Cadastrado!");
 		logger.log(Status.PASS, "Cadastro verificado");
 
 		extensao.flush();
 
 		ExtentTest logger2 = extensao.createTest("Cadastro nao realizado!");
-		logger2.log(Status.PASS, "Cadastro verificado");
+		logger2.log(Status.FAIL, "Cadastro verificado");
 
-		logger2.pass("Falha em registrar", MediaEntityBuilder.createScreenCaptureFromPath("C:\\Users\\angelica.jesus\\Pictures\\Logotipo.jpg").build());
-		
-		logger2.pass("Sucesso em registrar", MediaEntityBuilder.createScreenCaptureFromPath("C:\\Users\\angelica.jesus\\Pictures\\Logotipo.jpg").build());
-		
-		//logger2.addScreenCaptureFromPath("C:\\Users\\angelica.jesus\\Pictures\\Logotipo.jpg");
+		logger2.fail("Falha em registrar", MediaEntityBuilder
+				.createScreenCaptureFromPath("C:\\Users\\angelica.jesus\\Pictures\\Logotipo.jpg").build());
+
+		logger2.pass("Sucesso em registrar", MediaEntityBuilder
+				.createScreenCaptureFromPath("C:\\Users\\angelica.jesus\\Pictures\\Logotipo.jpg").build());
+
+		// logger2.addScreenCaptureFromPath("C:\\Users\\angelica.jesus\\Pictures\\Logotipo.jpg");
 		extensao.flush();
 
 	}

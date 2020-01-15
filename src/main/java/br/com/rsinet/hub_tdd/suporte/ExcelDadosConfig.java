@@ -3,7 +3,6 @@ package br.com.rsinet.hub_tdd.suporte;
 import java.io.FileInputStream;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -15,23 +14,21 @@ public class ExcelDadosConfig {
 
 	private static XSSFCell Cell;
 
-	private static XSSFRow Row;
+//Este método é definir o caminho do arquivo e abrir o arquivo do Excel, passar o caminho do Excel e o nome da folha como argumentos para este método
 
-//This method is to set the File path and to open the Excel file, Pass Excel Path and Sheetname as Arguments to this method
-
-	public static void setExcelFile(String Path, String SheetName) throws Exception {
+	public static void setExcelFile(String caminhoDoArquivo, String nomeDoArquivo) throws Exception {
 
 		try {
 
-			// Open the Excel file
+			// Abre o arquivo do Excel
 
-			FileInputStream ExcelFile = new FileInputStream(Path);
+			FileInputStream ExcelFile = new FileInputStream(caminhoDoArquivo);
 
-			// Access the required test data sheet
+			// Acessa a folha de dados de teste necessária
 
 			ExcelWBook = new XSSFWorkbook(ExcelFile);
 
-			ExcelWSheet = ExcelWBook.getSheet(SheetName);
+			ExcelWSheet = ExcelWBook.getSheet(nomeDoArquivo);
 
 		} catch (Exception e) {
 
@@ -41,13 +38,13 @@ public class ExcelDadosConfig {
 
 	}
 
-//This method is to read the test data from the Excel cell, in this we are passing parameters as Row num and Col num
-
-	public static String getCellData(int RowNum, int ColNum) throws Exception {
+//Este método é para ler os dados de teste da célula do Excel, neste estamos passando parâmetros como numero da linha e numero da coluna 
+	
+	public static String getCellData(int numeroDaLinha, int numeroDaColuna) throws Exception {
 
 		try {
 
-			Cell = ExcelWSheet.getRow(RowNum).getCell(ColNum);
+			Cell = ExcelWSheet.getRow(numeroDaLinha).getCell(numeroDaColuna);
 
 			String CellData = Cell.getStringCellValue();
 

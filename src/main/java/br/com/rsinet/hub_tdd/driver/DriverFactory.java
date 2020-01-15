@@ -15,9 +15,9 @@ public class DriverFactory {
 	public static WebDriver inicializarDriver() {
 		if (driver == null) {
 			driver = new ChromeDriver();
-			// driver.manage().window().maximize();
+			driver.manage().window().maximize();
 			driver.get("http://www.advantageonlineshopping.com/#/");
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		}
 		return driver;
 	}

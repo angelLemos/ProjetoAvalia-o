@@ -1,21 +1,36 @@
 package br.com.rsinet.hub_tdd.teste;
 
-import static br.com.rsinet.hub_tdd.driver.DriverFactory.fecharDriver;
 import static br.com.rsinet.hub_tdd.driver.DriverFactory.inicializarDriver;
 
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
 import br.com.rsinet.hub_tdd.pages.TelaFormularioCadastroPage;
 import br.com.rsinet.hub_tdd.pages.TelaInicialPage;
 import br.com.rsinet.hub_tdd.suporte.ExcelDadosConfig;
+import br.com.rsinet.hub_tdd.suporte.Utilitario;
 
 public class CadastrarClienteTeste {
 
-	private WebDriver driver;
+	WebDriver driver;
+	ExtentReports extensao;
+	ExtentTest logger;
 
 	TelaInicialPage telaInicial;
 
@@ -30,7 +45,17 @@ public class CadastrarClienteTeste {
 
 		formulario = PageFactory.initElements(driver, TelaFormularioCadastroPage.class);
 
-		ExcelDadosConfig.setExcelFile("C:\\Users\\angelica.jesus\\ExcelDados\\dados.xlsx", "Planilha1");
+		ExcelDadosConfig.setExcelFile("target/Excel/dados.xlsx", "Planilha1");
+		//ExcelDadosConfig.setExcelFile("C:\\Users\\angelica.jesus\\ExcelDados\\dados.xlsx", "Planilha1");
+
+		// Report
+		ExtentHtmlReporter reporte = new ExtentHtmlReporter("./Reports/cadastro.html");
+
+		extensao = new ExtentReports();
+
+		extensao.attachReporter(reporte);
+
+		logger = extensao.createTest("CadastroTeste");
 
 	}
 
@@ -57,11 +82,24 @@ public class CadastrarClienteTeste {
 		formulario.PreencherDetalhesPessoais(nome, sobrenome, telefone);
 		formulario.PreencherEndereco(pais, cidade, endereco, estado, cep);
 		formulario.ClicarEmAceitarTermos();
-		//formulario.ClicarEmRegistrar();
+		formulario.ClicarEmRegistrar();
+		driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+		driver.findElement(By.id("speakersTxt"));
+		Assert.assertEquals(driver.getCurrentUrl(), "http://www.advantageonlineshopping.com/");
 	}
 
-	@AfterMethod
-	public void finaliza() {
-		 fecharDriver();
+	@AfterTest
+	public void finaliza(ITestResult resultado) throws IOException {
+		if (resultado.getStatus() == ITestResult.FAILURE || resultado.getStatus() == ITestResult.SUCCESS) {
+			String tempo = Utilitario.getScreenshot(driver);
+			logger.fail(resultado.getThrowable().getMessage(),
+					MediaEntityBuilder.createScreenCaptureFromPath(tempo).build());
+//			logger.pass(resultado.getThrowable().getMessage(),
+//					MediaEntityBuilder.createScreenCaptureFromPath(tempo).build());
+			
+
+		}
+		extensao.flush();
+		//fecharDriver();
 	}
 }
