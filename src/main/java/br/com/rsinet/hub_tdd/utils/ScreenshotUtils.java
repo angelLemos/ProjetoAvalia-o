@@ -1,4 +1,4 @@
-package br.com.rsinet.hub_tdd.suporte;
+package br.com.rsinet.hub_tdd.utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,15 +8,14 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
-public class Utilitario {
+public class ScreenshotUtils {
 
 	public static String getScreenshot(WebDriver driver) {
 		TakesScreenshot ts = (TakesScreenshot) driver;
 
 		File src = ts.getScreenshotAs(OutputType.FILE);
-
 		String caminhoDoArquivo = System.getProperty("user.dir") + "/Screenshot/" + System.currentTimeMillis() + ".png";
-
+	
 		File destino = new File(caminhoDoArquivo);
 
 		try {

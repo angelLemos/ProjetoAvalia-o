@@ -1,8 +1,7 @@
 package br.com.rsinet.hub_tdd.teste;
 
-import static br.com.rsinet.hub_tdd.driver.DriverFactory.fecharDriver;
-import static br.com.rsinet.hub_tdd.driver.DriverFactory.inicializarDriver;
-
+import static br.com.rsinet.hub_tdd.utils.DriverFactory.fecharDriver;
+import static br.com.rsinet.hub_tdd.utils.DriverFactory.inicializarDriver;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;

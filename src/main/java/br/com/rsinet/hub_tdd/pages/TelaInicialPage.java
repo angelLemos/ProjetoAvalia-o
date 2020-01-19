@@ -1,12 +1,14 @@
 package br.com.rsinet.hub_tdd.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TelaInicialPage {
 
@@ -32,14 +34,15 @@ public class TelaInicialPage {
 		lnkUser.click();
 
 		// Comando de espera e seleciona o link Criar Nova Conta
-		WebElement element = driver.findElement(By.linkText("CREATE NEW ACCOUNT"));
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
-        executor.executeScript("arguments[0].click();", element);
-//		WebDriverWait wait = new WebDriverWait(driver, 15);
-//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("CREATE NEW ACCOUNT")));
-//		Actions actions = new Actions(driver);
-//		actions.moveToElement(lnkCriarNovaConta).click().perform();
-//		lnkCriarNovaConta.click();
+//		WebElement element = lnkCriarNovaConta;
+//        JavascriptExecutor executor = (JavascriptExecutor) driver;
+//        executor.executeScript("arguments[0].click();", element);
+		WebDriverWait wait = new WebDriverWait(driver, 15);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("CREATE NEW ACCOUNT")));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(lnkCriarNovaConta).click().perform();
+		lnkCriarNovaConta.click();
+      
 	}
 
 	public void ClicarProdutoTelaInicial() {

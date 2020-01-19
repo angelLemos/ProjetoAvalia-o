@@ -1,19 +1,18 @@
 package br.com.rsinet.hub_tdd.teste;
 
-import static br.com.rsinet.hub_tdd.driver.DriverFactory.inicializarDriver;
+import static br.com.rsinet.hub_tdd.utils.DriverFactory.fecharDriver;
+import static br.com.rsinet.hub_tdd.utils.DriverFactory.inicializarDriver;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentReports;
@@ -23,8 +22,8 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
 import br.com.rsinet.hub_tdd.pages.TelaFormularioCadastroPage;
 import br.com.rsinet.hub_tdd.pages.TelaInicialPage;
-import br.com.rsinet.hub_tdd.suporte.ExcelDadosConfig;
-import br.com.rsinet.hub_tdd.suporte.Utilitario;
+import br.com.rsinet.hub_tdd.utils.ExcelDadosConfig;
+import br.com.rsinet.hub_tdd.utils.ScreenshotUtils;
 
 public class CadastrarClienteTeste {
 
@@ -35,6 +34,7 @@ public class CadastrarClienteTeste {
 	TelaInicialPage telaInicial;
 
 	TelaFormularioCadastroPage formulario;
+	
 
 	@BeforeMethod
 	public void Inicializa() throws Exception {
@@ -46,27 +46,17 @@ public class CadastrarClienteTeste {
 		formulario = PageFactory.initElements(driver, TelaFormularioCadastroPage.class);
 
 		ExcelDadosConfig.setExcelFile("target/Excel/dados.xlsx", "Planilha1");
-		//ExcelDadosConfig.setExcelFile("C:\\Users\\angelica.jesus\\ExcelDados\\dados.xlsx", "Planilha1");
-
-		// Report
-		ExtentHtmlReporter reporte = new ExtentHtmlReporter("./Reports/cadastro.html");
-
-		extensao = new ExtentReports();
-
-		extensao.attachReporter(reporte);
-
-		logger = extensao.createTest("CadastroTeste");
 
 	}
 
-	@Test
-	public void cadastrarCliente() throws Exception {
-
-		// String criarConta = ExcelDadosConfig.getCellData(1, 12);
+	@Test  
+	public void testeSucessoCadastrarCliente() throws Exception {
+		
 		String userName = ExcelDadosConfig.getCellData(1, 0);
 		String email = ExcelDadosConfig.getCellData(1, 1);
-		String confirmSenha = ExcelDadosConfig.getCellData(1, 2);
-		String senha = ExcelDadosConfig.getCellData(1, 3);
+		String senha = ExcelDadosConfig.getCellData(1, 2);
+		String confirmSenha = ExcelDadosConfig.getCellData(1, 3);
+		
 
 		String nome = ExcelDadosConfig.getCellData(1, 4);
 		String sobrenome = ExcelDadosConfig.getCellData(1, 5);
@@ -76,6 +66,14 @@ public class CadastrarClienteTeste {
 		String endereco = ExcelDadosConfig.getCellData(1, 9);
 		String estado = ExcelDadosConfig.getCellData(1, 10);
 		String cep = ExcelDadosConfig.getCellData(1, 11);
+		
+		ExtentHtmlReporter reporte = new ExtentHtmlReporter("./Reports/cadastroCliente.html");
+
+		extensao = new ExtentReports();
+
+		extensao.attachReporter(reporte);
+
+		logger = extensao.createTest("Cadastro Realizado!");
 
 		telaInicial.ClicarEmCriarNovaConta();
 		formulario.PreencherDetalhesDaConta(userName, email, senha, confirmSenha);
@@ -83,23 +81,40 @@ public class CadastrarClienteTeste {
 		formulario.PreencherEndereco(pais, cidade, endereco, estado, cep);
 		formulario.ClicarEmAceitarTermos();
 		formulario.ClicarEmRegistrar();
-		driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
-		driver.findElement(By.id("speakersTxt"));
-		Assert.assertEquals(driver.getCurrentUrl(), "http://www.advantageonlineshopping.com/");
+//		WebDriverWait wait = new WebDriverWait(driver, 20);
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("menuUserLink")));
+		Thread.sleep(4000);
+		assertEquals(userName, driver.findElement(By.id("menuUserLink")).getText());
 	}
+	
+	@Test 
+	//Teste de validação do botao registrar desabilitado sem dados preenchidos 
+	public void validarBotaoRegistrarDesabilitadoSemDadosPreenchidos() throws Exception {
+		ExtentHtmlReporter reporte = new ExtentHtmlReporter("./Reports/validacaoBotao.html");
 
-	@AfterTest
+		extensao = new ExtentReports();
+
+		extensao.attachReporter(reporte);
+
+		logger = extensao.createTest("Validacao botao registrar");
+		
+		telaInicial.ClicarEmCriarNovaConta();
+		formulario.ClicarEmAceitarTermos();
+		assertFalse(formulario.verificarSeRegistrarEstaDisponivel());
+	}	
+
+	@AfterMethod
 	public void finaliza(ITestResult resultado) throws IOException {
-		if (resultado.getStatus() == ITestResult.FAILURE || resultado.getStatus() == ITestResult.SUCCESS) {
-			String tempo = Utilitario.getScreenshot(driver);
+		//String testName = new Throwable().getStackTrace()[0].getMethodName();
+		if (resultado.getStatus() == ITestResult.FAILURE) {
+			String tempo = ScreenshotUtils.getScreenshot(driver);
 			logger.fail(resultado.getThrowable().getMessage(),
 					MediaEntityBuilder.createScreenCaptureFromPath(tempo).build());
-//			logger.pass(resultado.getThrowable().getMessage(),
-//					MediaEntityBuilder.createScreenCaptureFromPath(tempo).build());
-			
-
+		} else if (resultado.getStatus() == ITestResult.SUCCESS) {
+			String tempo = ScreenshotUtils.getScreenshot(driver);
+			 logger.pass("", MediaEntityBuilder.createScreenCaptureFromPath(tempo).build());
 		}
 		extensao.flush();
-		//fecharDriver();
+		fecharDriver();
 	}
 }

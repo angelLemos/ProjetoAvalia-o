@@ -4,57 +4,63 @@ import java.io.IOException;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 public class TelaFormularioCadastroPage {
-
-	private WebDriver driver;
+	
+	final WebDriver driver;
 
 	@FindBy(how = How.NAME, using = "usernameRegisterPage")
-	public WebElement txtUsuario;
+	private WebElement txtUsuario;
 
 	@FindBy(how = How.NAME, using = "emailRegisterPage")
-	public WebElement txtEmail;
+	private WebElement txtEmail;
 
 	@FindBy(how = How.NAME, using = "passwordRegisterPage")
-	public WebElement txtSenha;
+	private WebElement txtSenha;
 
 	@FindBy(how = How.NAME, using = "confirm_passwordRegisterPage")
-	public WebElement txtConfirmaSenha;
+	private WebElement txtConfirmaSenha;
 
 	@FindBy(how = How.NAME, using = "first_nameRegisterPage")
-	public WebElement txtNome;
+	private WebElement txtNome;
 
 	@FindBy(how = How.NAME, using = "last_nameRegisterPage")
-	public WebElement txtSobrenome;
+	private WebElement txtSobrenome;
 
 	@FindBy(how = How.NAME, using = "phone_numberRegisterPage")
-	public WebElement txtTelefone;
+	private WebElement txtTelefone;
 
 	@FindBy(how = How.NAME, using = "countryListboxRegisterPage")
-	public WebElement cbxPais;
+	private WebElement cbxPais;
 
 	@FindBy(how = How.NAME, using = "cityRegisterPage")
-	public WebElement txtCidade;
+	private WebElement txtCidade;
 
 	@FindBy(how = How.NAME, using = "addressRegisterPage")
-	public WebElement txtEndereco;
+	private WebElement txtEndereco;
 
 	@FindBy(how = How.NAME, using = "state_/_province_/_regionRegisterPage")
-	public WebElement txtEstado;
+	private WebElement txtEstado;
 
 	@FindBy(how = How.NAME, using = "postal_codeRegisterPage")
-	public WebElement txtCEP;
+	private WebElement txtCEP;
 
 	@FindBy(how = How.NAME, using = "i_agree")
-	public WebElement chkAceitarTermos;
+	private WebElement chkAceitarTermos;
 
 	@FindBy(how = How.ID, using = "register_btnundefined")
-	public WebElement btnRegistrar;
+	private WebElement btnRegistrar;
+	
+	public TelaFormularioCadastroPage (WebDriver driver) {
+		this.driver = driver;
+	}
 
 	public void PreencherDetalhesDaConta(String userName, String email, String senha, String confirmSenha)
-			throws IOException {
+			throws Exception {
+		
 		txtUsuario.sendKeys(userName);
 		txtEmail.sendKeys(email);
 		txtSenha.sendKeys(senha);
@@ -70,7 +76,8 @@ public class TelaFormularioCadastroPage {
 	}
 
 	public void PreencherEndereco(String pais, String cidade, String endereco, String estado, String cep)
-			throws IOException {
+			throws IOException, InterruptedException {
+		Thread.sleep(1000);
 		cbxPais.sendKeys(pais);
 		txtCidade.sendKeys(cidade);
 		txtEndereco.sendKeys(endereco);
@@ -84,7 +91,12 @@ public class TelaFormularioCadastroPage {
 
 	public void ClicarEmRegistrar() {
 		btnRegistrar.click();
-
+	}
+	
+	public boolean verificarSeRegistrarEstaDisponivel() {
+		new Actions(driver).moveToElement(btnRegistrar).perform();
+		return btnRegistrar.isEnabled();
+		
 	}
 
 }
