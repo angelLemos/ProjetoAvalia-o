@@ -10,10 +10,10 @@ public class TelaListaProdutosPage {
 	final WebDriver driver;
 
 	@FindBy(how = How.ID, using = "31")
-	public WebElement txtProdutoDaTela;
+	private  WebElement txtProdutoDaTela;
 
 	@FindBy(how = How.ID, using = "11")
-	public WebElement txtProdutoDoCampo;
+	private WebElement txtProdutoDoCampo;
 
 	public TelaListaProdutosPage(WebDriver driver) {
 		this.driver = driver;

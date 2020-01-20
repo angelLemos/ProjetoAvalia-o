@@ -15,16 +15,19 @@ public class TelaInicialPage {
 	final WebDriver driver;
 
 	@FindBy(how = How.ID, using = "menuUser")
-	public WebElement lnkUser;
+	private WebElement lnkUser;
 
 	@FindBy(how = How.LINK_TEXT, using = "CREATE NEW ACCOUNT")
-	public WebElement lnkCriarNovaConta;
+	private WebElement lnkCriarNovaConta;
 
 	@FindBy(how = How.ID, using = "miceTxt")
-	public WebElement txtPesquisarProdutoTela;
+	private WebElement txtPesquisarProdutoTela;
 
-	@FindBy(how = How.NAME, using = "mobile_search")
-	public WebElement lnkPesquisaProdutoCampo;
+	@FindBy(how = How.ID, using = "menuSearch")
+	private WebElement lnkPesquisaProdutoCampo;
+	
+	@FindBy(how = How.ID, using = "autoComplete")
+	private WebElement txtPesquisaProdutoCampo;
 
 	public TelaInicialPage(WebDriver driver) {
 		this.driver = driver;
@@ -52,8 +55,13 @@ public class TelaInicialPage {
 
 	public void PesquisarProdutoCampo(String nomeProduto) {
 		// Busca produto por pesquisa
-		lnkPesquisaProdutoCampo.sendKeys(nomeProduto);
-		lnkPesquisaProdutoCampo.sendKeys(Keys.RETURN);
+//		WebDriverWait wait = new WebDriverWait(driver, 15);
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("CREATE NEW ACCOUNT")));
+//		Actions actions = new Actions(driver);
+//		actions.moveToElement(lnkPesquisaProdutoCampo).click().perform();
+		lnkPesquisaProdutoCampo.click();
+		txtPesquisaProdutoCampo.sendKeys(nomeProduto);
+		txtPesquisaProdutoCampo.sendKeys(Keys.RETURN);
 
 	}
 

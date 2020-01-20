@@ -5,9 +5,9 @@
     <classes>
       <class name="br.com.rsinet.hub_tdd.teste.CadastrarClienteTeste">
         <methods>
+          <include name="testeSucessoCadastrarCliente"/>
           <include name="finaliza"/>
           <include name="Inicializa"/>
-          <include name="validarBotaoRegistrarDesabilitadoSemDadosPreenchidos"/>
         </methods>
       </class> <!-- br.com.rsinet.hub_tdd.teste.CadastrarClienteTeste -->
     </classes>

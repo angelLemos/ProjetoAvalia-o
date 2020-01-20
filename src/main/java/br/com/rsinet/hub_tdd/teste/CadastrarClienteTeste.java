@@ -34,7 +34,6 @@ public class CadastrarClienteTeste {
 	TelaInicialPage telaInicial;
 
 	TelaFormularioCadastroPage formulario;
-	
 
 	@BeforeMethod
 	public void Inicializa() throws Exception {
@@ -47,16 +46,23 @@ public class CadastrarClienteTeste {
 
 		ExcelDadosConfig.setExcelFile("target/Excel/dados.xlsx", "Planilha1");
 
+//		ExtentHtmlReporter reporte = new ExtentHtmlReporter("./Reports/cadastroCliente.html");
+//
+//		extensao = new ExtentReports();
+//
+//		extensao.attachReporter(reporte);
+//
+//	//	logger = extensao.createTest("Cadastro Realizado!");
+
 	}
 
-	@Test  
+	@Test
 	public void testeSucessoCadastrarCliente() throws Exception {
-		
+
 		String userName = ExcelDadosConfig.getCellData(1, 0);
 		String email = ExcelDadosConfig.getCellData(1, 1);
 		String senha = ExcelDadosConfig.getCellData(1, 2);
 		String confirmSenha = ExcelDadosConfig.getCellData(1, 3);
-		
 
 		String nome = ExcelDadosConfig.getCellData(1, 4);
 		String sobrenome = ExcelDadosConfig.getCellData(1, 5);
@@ -66,7 +72,7 @@ public class CadastrarClienteTeste {
 		String endereco = ExcelDadosConfig.getCellData(1, 9);
 		String estado = ExcelDadosConfig.getCellData(1, 10);
 		String cep = ExcelDadosConfig.getCellData(1, 11);
-		
+
 		ExtentHtmlReporter reporte = new ExtentHtmlReporter("./Reports/cadastroCliente.html");
 
 		extensao = new ExtentReports();
@@ -86,9 +92,9 @@ public class CadastrarClienteTeste {
 		Thread.sleep(4000);
 		assertEquals(userName, driver.findElement(By.id("menuUserLink")).getText());
 	}
-	
-	@Test 
-	//Teste de validação do botao registrar desabilitado sem dados preenchidos 
+
+	@Test
+	// Teste de validação do botao registrar desabilitado sem dados preenchidos
 	public void validarBotaoRegistrarDesabilitadoSemDadosPreenchidos() throws Exception {
 		ExtentHtmlReporter reporte = new ExtentHtmlReporter("./Reports/validacaoBotao.html");
 
@@ -97,22 +103,22 @@ public class CadastrarClienteTeste {
 		extensao.attachReporter(reporte);
 
 		logger = extensao.createTest("Validacao botao registrar");
-		
+
 		telaInicial.ClicarEmCriarNovaConta();
 		formulario.ClicarEmAceitarTermos();
 		assertFalse(formulario.verificarSeRegistrarEstaDisponivel());
-	}	
+	}
 
 	@AfterMethod
 	public void finaliza(ITestResult resultado) throws IOException {
-		//String testName = new Throwable().getStackTrace()[0].getMethodName();
+		// String testName = new Throwable().getStackTrace()[0].getMethodName();
 		if (resultado.getStatus() == ITestResult.FAILURE) {
 			String tempo = ScreenshotUtils.getScreenshot(driver);
 			logger.fail(resultado.getThrowable().getMessage(),
 					MediaEntityBuilder.createScreenCaptureFromPath(tempo).build());
 		} else if (resultado.getStatus() == ITestResult.SUCCESS) {
 			String tempo = ScreenshotUtils.getScreenshot(driver);
-			 logger.pass("", MediaEntityBuilder.createScreenCaptureFromPath(tempo).build());
+			logger.pass("", MediaEntityBuilder.createScreenCaptureFromPath(tempo).build());
 		}
 		extensao.flush();
 		fecharDriver();
