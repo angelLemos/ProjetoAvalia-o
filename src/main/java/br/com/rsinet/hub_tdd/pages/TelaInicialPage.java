@@ -22,6 +22,9 @@ public class TelaInicialPage {
 
 	@FindBy(how = How.ID, using = "miceTxt")
 	private WebElement txtPesquisarProdutoTela;
+	
+	@FindBy(how = How.ID, using = "details_10")
+	private WebElement txtSelecionaProdutoDaTela;
 
 	@FindBy(how = How.ID, using = "menuSearch")
 	private WebElement lnkPesquisaProdutoCampo;
@@ -46,6 +49,10 @@ public class TelaInicialPage {
 		actions.moveToElement(lnkCriarNovaConta).click().perform();
 		lnkCriarNovaConta.click();
       
+	}
+	
+	public void ClicaEmNotebookTelaInicial() {
+		txtSelecionaProdutoDaTela.click();
 	}
 
 	public void ClicarProdutoTelaInicial() {

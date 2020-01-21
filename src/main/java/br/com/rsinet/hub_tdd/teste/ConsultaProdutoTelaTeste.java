@@ -7,6 +7,7 @@ import static org.testng.Assert.assertEquals;
 import java.io.IOException;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 //import org.junit.After;
 //import org.junit.Before;
 //import org.junit.Test;
@@ -34,6 +35,9 @@ public class ConsultaProdutoTelaTeste {
 	TelaListaProdutosPage telaListaProdutos;
 	ExtentReports extensao;
 	ExtentTest logger;
+	JavascriptExecutor js;
+
+	private String testName;
 
 	@BeforeMethod
 
@@ -59,6 +63,9 @@ public class ConsultaProdutoTelaTeste {
 		telaInicial.ClicarProdutoTelaInicial();
 		telaListaProdutos.SelecionarProdutoDaTela();
 		Assert.assertEquals("http://www.advantageonlineshopping.com/#/product/31", driver.getCurrentUrl());
+		testName = new Throwable().getStackTrace()[0].getMethodName();
+		js = (JavascriptExecutor) driver;
+        js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 1000);");
 	}
 	
 	@Test
@@ -72,9 +79,10 @@ public class ConsultaProdutoTelaTeste {
 
 		logger = extensao.createTest("Produto");
 		
-		driver.findElement(By.id("details_10")).click();
+		telaInicial.ClicaEmNotebookTelaInicial();
 		String textoElement = driver.findElement(By.xpath("/html[1]/body[1]/div[3]/section[1]/article[1]/div[2]/div[2]/h1[1]")).getText();
 		assertEquals( textoElement, "HP CHROMEBOOK 14 G1(ES)");
+		testName = new Throwable().getStackTrace()[0].getMethodName();
 	}
 	
 		
@@ -82,12 +90,12 @@ public class ConsultaProdutoTelaTeste {
 	@AfterMethod
 	public void finaliza(ITestResult resultado) throws IOException {
 		if (resultado.getStatus() == ITestResult.FAILURE) {
-			String tempo = ScreenshotUtils.getScreenshot(driver);
+			String tempo = ScreenshotUtils.getScreenshot(driver, testName);
 			logger.fail(resultado.getThrowable().getMessage(),
 					MediaEntityBuilder.createScreenCaptureFromPath(tempo).build());
 		} else if (resultado.getStatus() == ITestResult.SUCCESS) {
-			String tempo = ScreenshotUtils.getScreenshot(driver);
-			 logger.pass("", MediaEntityBuilder.createScreenCaptureFromPath(tempo).build());
+			String tempo = ScreenshotUtils.getScreenshot(driver, testName);
+			 logger.pass(testName, MediaEntityBuilder.createScreenCaptureFromPath(tempo).build());
 		}
 		extensao.flush();
 		fecharDriver();

@@ -34,6 +34,7 @@ public class CadastrarClienteTeste {
 	TelaInicialPage telaInicial;
 
 	TelaFormularioCadastroPage formulario;
+	private String testName;
 
 	@BeforeMethod
 	public void Inicializa() throws Exception {
@@ -52,7 +53,7 @@ public class CadastrarClienteTeste {
 //
 //		extensao.attachReporter(reporte);
 //
-//	//	logger = extensao.createTest("Cadastro Realizado!");
+//		logger = extensao.createTest("Cadastro Realizado!");
 
 	}
 
@@ -71,7 +72,7 @@ public class CadastrarClienteTeste {
 		String cidade = ExcelDadosConfig.getCellData(1, 8);
 		String endereco = ExcelDadosConfig.getCellData(1, 9);
 		String estado = ExcelDadosConfig.getCellData(1, 10);
-		String cep = ExcelDadosConfig.getCellData(1, 11);
+		String cep = ExcelDadosConfig.getCellData(1, 11); 
 
 		ExtentHtmlReporter reporte = new ExtentHtmlReporter("./Reports/cadastroCliente.html");
 
@@ -91,6 +92,7 @@ public class CadastrarClienteTeste {
 //		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("menuUserLink")));
 		Thread.sleep(4000);
 		assertEquals(userName, driver.findElement(By.id("menuUserLink")).getText());
+		testName = new Throwable().getStackTrace()[0].getMethodName();
 	}
 
 	@Test
@@ -107,20 +109,21 @@ public class CadastrarClienteTeste {
 		telaInicial.ClicarEmCriarNovaConta();
 		formulario.ClicarEmAceitarTermos();
 		assertFalse(formulario.verificarSeRegistrarEstaDisponivel());
+	   testName = new Throwable().getStackTrace()[0].getMethodName();
 	}
 
 	@AfterMethod
 	public void finaliza(ITestResult resultado) throws IOException {
-		// String testName = new Throwable().getStackTrace()[0].getMethodName();
 		if (resultado.getStatus() == ITestResult.FAILURE) {
-			String tempo = ScreenshotUtils.getScreenshot(driver);
+			String tempo = ScreenshotUtils.getScreenshot(driver, testName );
 			logger.fail(resultado.getThrowable().getMessage(),
 					MediaEntityBuilder.createScreenCaptureFromPath(tempo).build());
 		} else if (resultado.getStatus() == ITestResult.SUCCESS) {
-			String tempo = ScreenshotUtils.getScreenshot(driver);
-			logger.pass("", MediaEntityBuilder.createScreenCaptureFromPath(tempo).build());
+			String tempo = ScreenshotUtils.getScreenshot(driver, testName);
+			logger.pass(testName, MediaEntityBuilder.createScreenCaptureFromPath(tempo).build());
 		}
 		extensao.flush();
 		fecharDriver();
 	}
 }
+

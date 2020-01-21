@@ -10,11 +10,11 @@ import org.openqa.selenium.WebDriver;
 
 public class ScreenshotUtils {
 
-	public static String getScreenshot(WebDriver driver) {
+	public static String getScreenshot(WebDriver driver, String nomeScreen) {
 		TakesScreenshot ts = (TakesScreenshot) driver;
-
 		File src = ts.getScreenshotAs(OutputType.FILE);
-		String caminhoDoArquivo = System.getProperty("user.dir") + "/Screenshot/" + System.currentTimeMillis() + ".png";
+		String caminhoDoArquivo = System.getProperty("user.dir") + "/Screenshot/" + nomeScreen + ".png";
+		
 	
 		File destino = new File(caminhoDoArquivo);
 
@@ -27,4 +27,5 @@ public class ScreenshotUtils {
 		return caminhoDoArquivo;
 	}
 
+//	System.currentTimeMillis()
 }

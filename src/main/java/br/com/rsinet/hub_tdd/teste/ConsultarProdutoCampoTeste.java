@@ -32,6 +32,8 @@ public class ConsultarProdutoCampoTeste {
 	ExtentReports extensao;
 	ExtentTest logger;
 
+	private String testName;
+
 	@BeforeMethod
 
 	public void Inicializa() {
@@ -54,7 +56,7 @@ public class ConsultarProdutoCampoTeste {
 		telaInicial.PesquisarProdutoCampo("Laptops");
 		telaListaProdutos.SelecionarProdutoDoCampo();
 		Assert.assertEquals("http://www.advantageonlineshopping.com/#/product/11?viewAll=Laptops", driver.getCurrentUrl());
-
+		testName = new Throwable().getStackTrace()[0].getMethodName();
 	}
 	
 	@Test
@@ -72,19 +74,19 @@ public class ConsultarProdutoCampoTeste {
 		driver.findElement(By.id("autoComplete")).sendKeys(Keys.RETURN);
 		Thread.sleep(1000);
 		Assert.assertEquals(driver.getCurrentUrl(), "http://www.advantageonlineshopping.com/#/search/?viewAll=smartphones");
-		
+		testName = new Throwable().getStackTrace()[0].getMethodName();
 		
 	}
 
 	@AfterMethod
 	public void finaliza(ITestResult resultado) throws IOException {
 		if (resultado.getStatus() == ITestResult.FAILURE) {
-			String tempo = ScreenshotUtils.getScreenshot(driver);
+			String tempo = ScreenshotUtils.getScreenshot(driver, testName);
 			logger.fail(resultado.getThrowable().getMessage(),
 					MediaEntityBuilder.createScreenCaptureFromPath(tempo).build());
 		} else if (resultado.getStatus() == ITestResult.SUCCESS) {
-			String tempo = ScreenshotUtils.getScreenshot(driver);
-			 logger.pass("", MediaEntityBuilder.createScreenCaptureFromPath(tempo).build());
+			String tempo = ScreenshotUtils.getScreenshot(driver, testName);
+			 logger.pass(testName, MediaEntityBuilder.createScreenCaptureFromPath(tempo).build());
 		}
 		extensao.flush();
 		fecharDriver();
