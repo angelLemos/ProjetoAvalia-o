@@ -6,6 +6,7 @@ import static br.com.rsinet.hub_tdd.utils.DriverFactory.inicializarDriver;
 import java.io.IOException;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -31,6 +32,7 @@ public class ConsultarProdutoCampoTeste {
 	TelaListaProdutosPage telaListaProdutos;
 	ExtentReports extensao;
 	ExtentTest logger;
+	JavascriptExecutor js;
 
 	private String testName;
 
@@ -72,8 +74,9 @@ public class ConsultarProdutoCampoTeste {
 		driver.findElement(By.id("menuSearch")).click();
 		driver.findElement(By.id("autoComplete")).sendKeys("smartphones");
 		driver.findElement(By.id("autoComplete")).sendKeys(Keys.RETURN);
-		Thread.sleep(1000);
-		Assert.assertEquals(driver.getCurrentUrl(), "http://www.advantageonlineshopping.com/#/search/?viewAll=smartphones");
+		js = (JavascriptExecutor) driver;
+        js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 1000);");
+		Assert.assertTrue(driver.getPageSource().contains(" No results for \"smartphones\""));
 		testName = new Throwable().getStackTrace()[0].getMethodName();
 		
 	}

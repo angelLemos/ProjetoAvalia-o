@@ -8,6 +8,7 @@ import static org.testng.Assert.assertFalse;
 import java.io.IOException;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.ITestResult;
@@ -30,6 +31,7 @@ public class CadastrarClienteTeste {
 	WebDriver driver;
 	ExtentReports extensao;
 	ExtentTest logger;
+	JavascriptExecutor js;
 
 	TelaInicialPage telaInicial;
 
@@ -88,9 +90,8 @@ public class CadastrarClienteTeste {
 		formulario.PreencherEndereco(pais, cidade, endereco, estado, cep);
 		formulario.ClicarEmAceitarTermos();
 		formulario.ClicarEmRegistrar();
-//		WebDriverWait wait = new WebDriverWait(driver, 20);
-//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("menuUserLink")));
-		Thread.sleep(4000);
+		js = (JavascriptExecutor) driver;
+        js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 1000);");
 		assertEquals(userName, driver.findElement(By.id("menuUserLink")).getText());
 		testName = new Throwable().getStackTrace()[0].getMethodName();
 	}

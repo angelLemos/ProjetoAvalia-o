@@ -26,6 +26,4 @@ public class ScreenshotUtils {
 
 		return caminhoDoArquivo;
 	}
-
-//	System.currentTimeMillis()
 }

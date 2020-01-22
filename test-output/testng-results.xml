@@ -2,31 +2,31 @@
 <testng-results skipped="0" failed="0" ignored="1" total="2" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="13644" started-at="2020-01-21T14:03:30 BRST" finished-at="2020-01-21T14:03:44 BRST">
+  <suite name="Default suite" duration-ms="17432" started-at="2020-01-21T22:17:33 BRST" finished-at="2020-01-21T22:17:50 BRST">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="13644" started-at="2020-01-21T14:03:30 BRST" finished-at="2020-01-21T14:03:44 BRST">
-      <class name="br.com.rsinet.hub_tdd.teste.ConsultaProdutoTelaTeste">
-        <test-method status="PASS" signature="Inicializa()[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultaProdutoTelaTeste@e320068]" name="Inicializa" is-config="true" duration-ms="10728" started-at="2020-01-21T14:03:30 BRST" finished-at="2020-01-21T14:03:41 BRST">
+    <test name="Default test" duration-ms="17432" started-at="2020-01-21T22:17:33 BRST" finished-at="2020-01-21T22:17:50 BRST">
+      <class name="br.com.rsinet.hub_tdd.teste.CadastrarClienteTeste">
+        <test-method status="PASS" signature="Inicializa()[pri:0, instance:br.com.rsinet.hub_tdd.teste.CadastrarClienteTeste@e320068]" name="Inicializa" is-config="true" duration-ms="11247" started-at="2020-01-21T22:17:33 BRST" finished-at="2020-01-21T22:17:44 BRST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Inicializa -->
-        <test-method status="PASS" signature="pesquisaProdutoTela()[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultaProdutoTelaTeste@e320068]" name="pesquisaProdutoTela" duration-ms="1742" started-at="2020-01-21T14:03:41 BRST" finished-at="2020-01-21T14:03:42 BRST">
+        <test-method status="PASS" signature="testeSucessoCadastrarCliente()[pri:0, instance:br.com.rsinet.hub_tdd.teste.CadastrarClienteTeste@e320068]" name="testeSucessoCadastrarCliente" duration-ms="4810" started-at="2020-01-21T22:17:44 BRST" finished-at="2020-01-21T22:17:49 BRST">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- pesquisaProdutoTela -->
-        <test-method status="PASS" signature="finaliza(org.testng.ITestResult)[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultaProdutoTelaTeste@e320068]" name="finaliza" is-config="true" duration-ms="1147" started-at="2020-01-21T14:03:42 BRST" finished-at="2020-01-21T14:03:44 BRST">
+        </test-method> <!-- testeSucessoCadastrarCliente -->
+        <test-method status="PASS" signature="finaliza(org.testng.ITestResult)[pri:0, instance:br.com.rsinet.hub_tdd.teste.CadastrarClienteTeste@e320068]" name="finaliza" is-config="true" duration-ms="1348" started-at="2020-01-21T22:17:49 BRST" finished-at="2020-01-21T22:17:50 BRST">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=pesquisaProdutoTela status=SUCCESS method=ConsultaProdutoTelaTeste.pesquisaProdutoTela()[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultaProdutoTelaTeste@e320068] output={null}]]]>
+                <![CDATA[[TestResult name=testeSucessoCadastrarCliente status=SUCCESS method=CadastrarClienteTeste.testeSucessoCadastrarCliente()[pri:0, instance:br.com.rsinet.hub_tdd.teste.CadastrarClienteTeste@e320068] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- finaliza -->
-      </class> <!-- br.com.rsinet.hub_tdd.teste.ConsultaProdutoTelaTeste -->
+      </class> <!-- br.com.rsinet.hub_tdd.teste.CadastrarClienteTeste -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
