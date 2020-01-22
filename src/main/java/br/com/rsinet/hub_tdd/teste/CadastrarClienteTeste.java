@@ -49,13 +49,7 @@ public class CadastrarClienteTeste {
 
 		ExcelDadosConfig.setExcelFile("target/Excel/dados.xlsx", "Planilha1");
 
-//		ExtentHtmlReporter reporte = new ExtentHtmlReporter("./Reports/cadastroCliente.html");
-//
-//		extensao = new ExtentReports();
-//
-//		extensao.attachReporter(reporte);
-//
-//		logger = extensao.createTest("Cadastro Realizado!");
+
 
 	}
 
@@ -76,7 +70,7 @@ public class CadastrarClienteTeste {
 		String estado = ExcelDadosConfig.getCellData(1, 10);
 		String cep = ExcelDadosConfig.getCellData(1, 11); 
 
-		ExtentHtmlReporter reporte = new ExtentHtmlReporter("./Reports/cadastroCliente.html");
+		ExtentHtmlReporter reporte = new ExtentHtmlReporter("./Reports/formularioTestes.html");
 
 		extensao = new ExtentReports();
 
@@ -99,27 +93,23 @@ public class CadastrarClienteTeste {
 	@Test
 	// Teste de validação do botao registrar desabilitado sem dados preenchidos
 	public void validarBotaoRegistrarDesabilitadoSemDadosPreenchidos() throws Exception {
-		ExtentHtmlReporter reporte = new ExtentHtmlReporter("./Reports/validacaoBotao.html");
-
-		extensao = new ExtentReports();
-
-		extensao.attachReporter(reporte);
-
-		logger = extensao.createTest("Validacao botao registrar");
-
 		telaInicial.ClicarEmCriarNovaConta();
+		js = (JavascriptExecutor) driver;
+        js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 1000);");
 		formulario.ClicarEmAceitarTermos();
 		assertFalse(formulario.verificarSeRegistrarEstaDisponivel());
 	   testName = new Throwable().getStackTrace()[0].getMethodName();
+	   logger = extensao.createTest("Botao desabilitado!");
 	}
 
 	@AfterMethod
 	public void finaliza(ITestResult resultado) throws IOException {
-		if (resultado.getStatus() == ITestResult.FAILURE) {
-			String tempo = ScreenshotUtils.getScreenshot(driver, testName );
-			logger.fail(resultado.getThrowable().getMessage(),
-					MediaEntityBuilder.createScreenCaptureFromPath(tempo).build());
-		} else if (resultado.getStatus() == ITestResult.SUCCESS) {
+//		if (resultado.getStatus() == ITestResult.FAILURE) {
+//			String tempo = ScreenshotUtils.getScreenshot(driver, testName );
+//			logger.fail(resultado.getThrowable().getMessage(),
+//					MediaEntityBuilder.createScreenCaptureFromPath(tempo).build());
+//		} else 
+			if (resultado.getStatus() == ITestResult.SUCCESS) {
 			String tempo = ScreenshotUtils.getScreenshot(driver, testName);
 			logger.pass(testName, MediaEntityBuilder.createScreenCaptureFromPath(tempo).build());
 		}

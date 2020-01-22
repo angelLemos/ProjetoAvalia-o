@@ -25,7 +25,7 @@ import br.com.rsinet.hub_tdd.pages.TelaInicialPage;
 import br.com.rsinet.hub_tdd.pages.TelaListaProdutosPage;
 import br.com.rsinet.hub_tdd.utils.ScreenshotUtils;
 
-public class ConsultarProdutoCampoTeste {
+public class ConsultarProdutoLupaTeste {
 	static WebDriver driver;
 
 	TelaInicialPage telaInicial;
@@ -53,23 +53,18 @@ public class ConsultarProdutoCampoTeste {
 
 		extensao.attachReporter(reporte);
 
-		logger = extensao.createTest("ProdutoCampo");
+		logger = extensao.createTest("Pesquisa produto campo");
 		
 		telaInicial.PesquisarProdutoCampo("Laptops");
 		telaListaProdutos.SelecionarProdutoDoCampo();
+		js = (JavascriptExecutor) driver;
+        js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 1000);");
 		Assert.assertEquals("http://www.advantageonlineshopping.com/#/product/11?viewAll=Laptops", driver.getCurrentUrl());
 		testName = new Throwable().getStackTrace()[0].getMethodName();
 	}
 	
 	@Test
 	public void pesquisarProdutoInexistente() throws InterruptedException {
-		ExtentHtmlReporter reporte = new ExtentHtmlReporter("./Reports/pesquisarProdutoInexistente.html");
-
-		extensao = new ExtentReports();
-
-		extensao.attachReporter(reporte);
-
-		logger = extensao.createTest("ProdutoInexistente");
 		
 		driver.findElement(By.id("menuSearch")).click();
 		driver.findElement(By.id("autoComplete")).sendKeys("smartphones");
@@ -78,6 +73,7 @@ public class ConsultarProdutoCampoTeste {
         js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 1000);");
 		Assert.assertTrue(driver.getPageSource().contains(" No results for \"smartphones\""));
 		testName = new Throwable().getStackTrace()[0].getMethodName();
+		logger = extensao.createTest("Produto Inexistente");
 		
 	}
 
@@ -87,7 +83,8 @@ public class ConsultarProdutoCampoTeste {
 			String tempo = ScreenshotUtils.getScreenshot(driver, testName);
 			logger.fail(resultado.getThrowable().getMessage(),
 					MediaEntityBuilder.createScreenCaptureFromPath(tempo).build());
-		} else if (resultado.getStatus() == ITestResult.SUCCESS) {
+		} else
+		if (resultado.getStatus() == ITestResult.SUCCESS) {
 			String tempo = ScreenshotUtils.getScreenshot(driver, testName);
 			 logger.pass(testName, MediaEntityBuilder.createScreenCaptureFromPath(tempo).build());
 		}

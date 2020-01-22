@@ -1,4 +1,4 @@
-package br.com.rsinet.hub_tdd.teste;
+ package br.com.rsinet.hub_tdd.teste;
 
 import static br.com.rsinet.hub_tdd.utils.DriverFactory.fecharDriver;
 import static br.com.rsinet.hub_tdd.utils.DriverFactory.inicializarDriver;
@@ -40,13 +40,13 @@ public class ConsultaProdutoTelaTeste {
 	private String testName;
 
 	@BeforeMethod
-
 	public void Inicializa() {
 
 		driver = inicializarDriver();
 
 		telaInicial = PageFactory.initElements(driver, TelaInicialPage.class);
 		telaListaProdutos = PageFactory.initElements(driver, TelaListaProdutosPage.class);
+		
 	}
 
 	@Test
@@ -58,7 +58,7 @@ public class ConsultaProdutoTelaTeste {
 
 		extensao.attachReporter(reporte);
 
-		logger = extensao.createTest("Produto");
+		logger = extensao.createTest("Pesquisa do produto");
 		
 		telaInicial.ClicarProdutoTelaInicial();
 		telaListaProdutos.SelecionarProdutoDaTela();
@@ -66,23 +66,17 @@ public class ConsultaProdutoTelaTeste {
 		testName = new Throwable().getStackTrace()[0].getMethodName();
 		js = (JavascriptExecutor) driver;
         js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 1000);");
+      
 	}
 	
 	@Test
 	public void validarAberturaProdutoErrado() {
-		//report
-		ExtentHtmlReporter reporte = new ExtentHtmlReporter("./Reports/validarAberturaProdutoErrado.html");
-
-		extensao = new ExtentReports();
-
-		extensao.attachReporter(reporte);
-
-		logger = extensao.createTest("Produto");
 		
 		telaInicial.ClicaEmNotebookTelaInicial();
 		String textoElement = driver.findElement(By.xpath("/html[1]/body[1]/div[3]/section[1]/article[1]/div[2]/div[2]/h1[1]")).getText();
 		assertEquals( textoElement, "HP CHROMEBOOK 14 G1(ES)");
 		testName = new Throwable().getStackTrace()[0].getMethodName();
+		logger = extensao.createTest("Abertura de outro produto");
 	}
 	
 		
