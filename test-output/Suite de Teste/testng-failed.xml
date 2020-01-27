@@ -8,31 +8,10 @@
           <include name="finaliza"/>
           <include name="finalizaReport"/>
           <include name="Inicializa"/>
-          <include name="pesquisaProdutoTela"/>
           <include name="validarAberturaProdutoErrado"/>
           <include name="setConfigReport"/>
         </methods>
       </class> <!-- br.com.rsinet.hub_tdd.teste.ConsultaProdutoTelaTeste -->
-      <class name="br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste">
-        <methods>
-          <include name="finalizaReport"/>
-          <include name="Inicializa"/>
-          <include name="finaliza"/>
-          <include name="setConfigReport"/>
-          <include name="pesquisaProdutoCampo"/>
-          <include name="pesquisarProdutoInexistente"/>
-        </methods>
-      </class> <!-- br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste -->
-      <class name="br.com.rsinet.hub_tdd.teste.CadastrarClienteTeste">
-        <methods>
-          <include name="testeSucessoCadastrarCliente"/>
-          <include name="finalizaReport"/>
-          <include name="finaliza"/>
-          <include name="Inicializa"/>
-          <include name="setConfigReport"/>
-          <include name="validarBotaoRegistrarDesabilitadoSemDadosPreenchidos"/>
-        </methods>
-      </class> <!-- br.com.rsinet.hub_tdd.teste.CadastrarClienteTeste -->
     </classes>
   </test> <!-- Automacao utilizando TDD(failed) -->
 </suite> <!-- Failed suite [Suite de Teste] -->

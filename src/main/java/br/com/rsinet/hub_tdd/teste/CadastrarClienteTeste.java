@@ -10,7 +10,10 @@ import java.io.IOException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
@@ -33,7 +36,7 @@ public class CadastrarClienteTeste {
 	ExtentReports extensao;
 	ExtentTest test;
 	JavascriptExecutor js;
-
+	WebDriverWait wait;
 	TelaInicialPage telaInicial;
 
 	TelaFormularioCadastroPage formulario;
@@ -43,29 +46,34 @@ public class CadastrarClienteTeste {
 	
 	@BeforeTest
 	public void setConfigReport() {
-		/*setando o reporte e enviando a string definindo o nome do arquivo report deste teste*/
+		//setando o reporte 
 		ReportConfig.setReport();
 	}
 	@BeforeMethod
 	public void Inicializa() throws Exception {
-
+        //Inicializando o driver
 		driver = inicializarDriver();
 
 		telaInicial = PageFactory.initElements(driver, TelaInicialPage.class);
 
 		formulario = PageFactory.initElements(driver, TelaFormularioCadastroPage.class);
+		//nome da planilha no excel
 		ExcelDadosConfig.setExcelFile("Planilha1");
-		
+		// Instanciando a massa de dados
 		excel = new MassaDeDados();
+		
+		wait = new WebDriverWait(driver, 10);
 		
 	}
 
 	@Test
 	public void testeSucessoCadastrarCliente() throws Exception {
 
-
+		
 		telaInicial.clicarEmMenuUsuario();
 		telaInicial.ClicarEmCriarNovaConta();
+		
+		//Enviando dados da massa para formulario
 		formulario.insereNomeUsuario(excel.getUserName());
 		formulario.insereEmail(excel.getEmail());
 		formulario.insereSenha(excel.getSenha());
@@ -80,22 +88,24 @@ public class CadastrarClienteTeste {
 		formulario.insereCEP(excel.getCEP());
 		formulario.ClicarEmAceitarTermos();
 		formulario.ClicarEmRegistrar();
-		js = (JavascriptExecutor) driver;
-		js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 2000);");
-		assertEquals(driver.findElement(By.id("menuUserLink")).getText(), excel.getUserName());
-		/*definindo teste para o report*/
+		
+		//Utilizando tempo para aguardar a pagina de logado para realizar o assert
+//		js = (JavascriptExecutor) driver;
+//		js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 2000);");
+		wait.until(ExpectedConditions.urlToBe("http://www.advantageonlineshopping.com/#/"));
+		WebElement element = driver.findElement(By.xpath("//*[@id=\"menuUserLink\"]/span"));
+		wait.until(ExpectedConditions.visibilityOf(element));
+		assertEquals(element.getText(), excel.getUserName());
+		
+		// definindo teste para o report
 		test = ReportConfig.createTest("SucessoCadastrarCliente");
 	}
 
 	@Test
 	// Teste de validação do botao registrar desabilitado sem dados preenchidos
 	public void validarBotaoRegistrarDesabilitadoSemDadosPreenchidos() throws Exception {
-		js = (JavascriptExecutor) driver;
-		js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 3000);");
 		telaInicial.clicarEmMenuUsuario();
 		telaInicial.ClicarEmCriarNovaConta();
-		js = (JavascriptExecutor) driver;
-		js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 3000);");
 		formulario.ClicarEmAceitarTermos();
 		assertFalse(formulario.verificarSeRegistrarEstaDisponivel());
 
