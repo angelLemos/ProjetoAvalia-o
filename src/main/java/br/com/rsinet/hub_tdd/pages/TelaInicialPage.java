@@ -27,22 +27,21 @@ public class TelaInicialPage {
 	private WebElement txtSelecionaProdutoDaTela;
 
 	@FindBy(how = How.ID, using = "menuSearch")
-	private WebElement lnkPesquisaProdutoCampo;
+	private WebElement lnkClicarLupa;
 	
 	@FindBy(how = How.ID, using = "autoComplete")
-	private WebElement txtPesquisaProdutoCampo;
+	private WebElement txtInserirNomeProduto;
 
 	public TelaInicialPage(WebDriver driver) {
 		this.driver = driver;
 	}
+	
+
+	public void clicarEmMenuUsuario() {
+		lnkUser.click();
+	}
 
 	public void ClicarEmCriarNovaConta() {
-		lnkUser.click();
-
-		// Comando de espera e seleciona o link Criar Nova Conta
-//		WebElement element = lnkCriarNovaConta;
-//        JavascriptExecutor executor = (JavascriptExecutor) driver;
-//        executor.executeScript("arguments[0].click();", element);
 		WebDriverWait wait = new WebDriverWait(driver, 15);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("CREATE NEW ACCOUNT")));
 		Actions actions = new Actions(driver);
@@ -59,16 +58,14 @@ public class TelaInicialPage {
 		// Seleciona o produto na tela incial
 		txtPesquisarProdutoTela.click();
 	}
+	
+	public void clicarNaLupa() throws InterruptedException {
+		lnkClicarLupa.click();
+	}
 
-	public void PesquisarProdutoCampo(String nomeProduto) {
-		// Busca produto por pesquisa
-//		WebDriverWait wait = new WebDriverWait(driver, 15);
-//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("CREATE NEW ACCOUNT")));
-//		Actions actions = new Actions(driver);
-//		actions.moveToElement(lnkPesquisaProdutoCampo).click().perform();
-		lnkPesquisaProdutoCampo.click();
-		txtPesquisaProdutoCampo.sendKeys(nomeProduto);
-		txtPesquisaProdutoCampo.sendKeys(Keys.RETURN);
+	public void inserirProduto(String nomeProduto) {
+		txtInserirNomeProduto.sendKeys(nomeProduto);
+		txtInserirNomeProduto.sendKeys(Keys.RETURN);
 
 	}
 

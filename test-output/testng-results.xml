@@ -2,43 +2,43 @@
 <testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="27235" started-at="2020-01-22T11:47:44 BRST" finished-at="2020-01-22T11:48:11 BRST">
+  <suite name="Default suite" duration-ms="31595" started-at="2020-01-26T22:27:54 BRST" finished-at="2020-01-26T22:28:26 BRST">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="27235" started-at="2020-01-22T11:47:44 BRST" finished-at="2020-01-22T11:48:11 BRST">
+    <test name="Default test" duration-ms="31595" started-at="2020-01-26T22:27:54 BRST" finished-at="2020-01-26T22:28:26 BRST">
       <class name="br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste">
-        <test-method status="PASS" signature="Inicializa()[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste@59e5ddf]" name="Inicializa" is-config="true" duration-ms="10780" started-at="2020-01-22T11:47:44 BRST" finished-at="2020-01-22T11:47:55 BRST">
+        <test-method status="PASS" signature="Inicializa()[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste@2362f559]" name="Inicializa" is-config="true" duration-ms="12485" started-at="2020-01-26T22:27:54 BRST" finished-at="2020-01-26T22:28:07 BRST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Inicializa -->
-        <test-method status="PASS" signature="pesquisaProdutoCampo()[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste@59e5ddf]" name="pesquisaProdutoCampo" duration-ms="1935" started-at="2020-01-22T11:47:55 BRST" finished-at="2020-01-22T11:47:57 BRST">
+        <test-method status="PASS" signature="pesquisaProdutoCampo()[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste@2362f559]" name="pesquisaProdutoCampo" duration-ms="2583" started-at="2020-01-26T22:28:07 BRST" finished-at="2020-01-26T22:28:09 BRST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- pesquisaProdutoCampo -->
-        <test-method status="PASS" signature="finaliza(org.testng.ITestResult)[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste@59e5ddf]" name="finaliza" is-config="true" duration-ms="1211" started-at="2020-01-22T11:47:57 BRST" finished-at="2020-01-22T11:47:58 BRST">
+        <test-method status="PASS" signature="finaliza(org.testng.ITestResult)[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste@2362f559]" name="finaliza" is-config="true" duration-ms="1855" started-at="2020-01-26T22:28:09 BRST" finished-at="2020-01-26T22:28:11 BRST">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=pesquisaProdutoCampo status=SUCCESS method=ConsultarProdutoLupaTeste.pesquisaProdutoCampo()[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste@59e5ddf] output={null}]]]>
+                <![CDATA[[TestResult name=pesquisaProdutoCampo status=SUCCESS method=ConsultarProdutoLupaTeste.pesquisaProdutoCampo()[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste@2362f559] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- finaliza -->
-        <test-method status="PASS" signature="Inicializa()[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste@59e5ddf]" name="Inicializa" is-config="true" duration-ms="10972" started-at="2020-01-22T11:47:58 BRST" finished-at="2020-01-22T11:48:09 BRST">
+        <test-method status="PASS" signature="Inicializa()[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste@2362f559]" name="Inicializa" is-config="true" duration-ms="10489" started-at="2020-01-26T22:28:11 BRST" finished-at="2020-01-26T22:28:22 BRST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Inicializa -->
-        <test-method status="PASS" signature="pesquisarProdutoInexistente()[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste@59e5ddf]" name="pesquisarProdutoInexistente" duration-ms="1326" started-at="2020-01-22T11:48:09 BRST" finished-at="2020-01-22T11:48:10 BRST">
+        <test-method status="PASS" signature="pesquisarProdutoInexistente()[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste@2362f559]" name="pesquisarProdutoInexistente" duration-ms="2905" started-at="2020-01-26T22:28:22 BRST" finished-at="2020-01-26T22:28:25 BRST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- pesquisarProdutoInexistente -->
-        <test-method status="PASS" signature="finaliza(org.testng.ITestResult)[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste@59e5ddf]" name="finaliza" is-config="true" duration-ms="981" started-at="2020-01-22T11:48:10 BRST" finished-at="2020-01-22T11:48:11 BRST">
+        <test-method status="PASS" signature="finaliza(org.testng.ITestResult)[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste@2362f559]" name="finaliza" is-config="true" duration-ms="1208" started-at="2020-01-26T22:28:25 BRST" finished-at="2020-01-26T22:28:26 BRST">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=pesquisarProdutoInexistente status=SUCCESS method=ConsultarProdutoLupaTeste.pesquisarProdutoInexistente()[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste@59e5ddf] output={null}]]]>
+                <![CDATA[[TestResult name=pesquisarProdutoInexistente status=SUCCESS method=ConsultarProdutoLupaTeste.pesquisarProdutoInexistente()[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste@2362f559] output={null}]]]>
               </value>
             </param>
           </params>

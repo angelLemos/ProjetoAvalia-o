@@ -2,12 +2,12 @@ package br.com.rsinet.hub_tdd.teste;
 
 import static br.com.rsinet.hub_tdd.utils.DriverFactory.fecharDriver;
 import static br.com.rsinet.hub_tdd.utils.DriverFactory.inicializarDriver;
+import static org.testng.Assert.assertEquals;
 
 import java.io.IOException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -43,36 +43,39 @@ public class ConsultarProdutoLupaTeste {
 
 		telaInicial = PageFactory.initElements(driver, TelaInicialPage.class);
 		telaListaProdutos = PageFactory.initElements(driver, TelaListaProdutosPage.class);
+
 	}
 
 	@Test
 	public void pesquisaProdutoCampo() {
+		// Geracao de report 
 		ExtentHtmlReporter reporte = new ExtentHtmlReporter("./Reports/pesquisaProdutoCampo.html");
 
 		extensao = new ExtentReports();
 
 		extensao.attachReporter(reporte);
-
-		logger = extensao.createTest("Pesquisa produto campo");
 		
-		telaInicial.PesquisarProdutoCampo("Laptops");
+		telaInicial.inserirProduto("Laptops");
 		telaListaProdutos.SelecionarProdutoDoCampo();
 		js = (JavascriptExecutor) driver;
         js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 1000);");
 		Assert.assertEquals("http://www.advantageonlineshopping.com/#/product/11?viewAll=Laptops", driver.getCurrentUrl());
 		testName = new Throwable().getStackTrace()[0].getMethodName();
+		logger = extensao.createTest("Pesquisa produto campo");
 	}
 	
 	@Test
 	public void pesquisarProdutoInexistente() throws InterruptedException {
-		
-		driver.findElement(By.id("menuSearch")).click();
-		driver.findElement(By.id("autoComplete")).sendKeys("smartphones");
-		driver.findElement(By.id("autoComplete")).sendKeys(Keys.RETURN);
+
+		telaInicial.clicarNaLupa();
+		telaInicial.inserirProduto("smartphones");
 		js = (JavascriptExecutor) driver;
-        js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 1000);");
-		Assert.assertTrue(driver.getPageSource().contains(" No results for \"smartphones\""));
+		js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 2000);");
+		
+		String textoElement = driver.findElement(By.xpath("/html[1]/body[1]/div[3]/section[1]/article[1]/div[3]/div[1]/label[1]/span[1]")).getText();
+		assertEquals(textoElement, "No results for \"smartphones\"");
 		testName = new Throwable().getStackTrace()[0].getMethodName();
+		
 		logger = extensao.createTest("Produto Inexistente");
 		
 	}

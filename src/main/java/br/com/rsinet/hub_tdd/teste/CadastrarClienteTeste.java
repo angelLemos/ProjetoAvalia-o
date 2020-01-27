@@ -49,8 +49,6 @@ public class CadastrarClienteTeste {
 
 		ExcelDadosConfig.setExcelFile("target/Excel/dados.xlsx", "Planilha1");
 
-
-
 	}
 
 	@Test
@@ -68,7 +66,7 @@ public class CadastrarClienteTeste {
 		String cidade = ExcelDadosConfig.getCellData(1, 8);
 		String endereco = ExcelDadosConfig.getCellData(1, 9);
 		String estado = ExcelDadosConfig.getCellData(1, 10);
-		String cep = ExcelDadosConfig.getCellData(1, 11); 
+		String cep = ExcelDadosConfig.getCellData(1, 11);
 
 		ExtentHtmlReporter reporte = new ExtentHtmlReporter("./Reports/formularioTestes.html");
 
@@ -78,15 +76,25 @@ public class CadastrarClienteTeste {
 
 		logger = extensao.createTest("Cadastro Realizado!");
 
+		telaInicial.clicarEmMenuUsuario();
 		telaInicial.ClicarEmCriarNovaConta();
-		formulario.PreencherDetalhesDaConta(userName, email, senha, confirmSenha);
-		formulario.PreencherDetalhesPessoais(nome, sobrenome, telefone);
-		formulario.PreencherEndereco(pais, cidade, endereco, estado, cep);
+		formulario.insereNomeUsuario(userName);
+		formulario.insereEmail(email);
+		formulario.insereSenha(senha);
+		formulario.confirmaSenha(confirmSenha);
+		formulario.insereNome(nome);
+		formulario.insereSobrenome(sobrenome);
+		formulario.insereTelefone(telefone);
+		formulario.selecionaPais(pais);
+		formulario.insereCidade(cidade);
+		formulario.insereEndereco(endereco);
+		formulario.insereEstado(estado);
+		formulario.insereCEP(cep);
 		formulario.ClicarEmAceitarTermos();
 		formulario.ClicarEmRegistrar();
 		js = (JavascriptExecutor) driver;
-        js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 1000);");
-		assertEquals(userName, driver.findElement(By.id("menuUserLink")).getText());
+		js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 1000);");
+		assertEquals(driver.findElement(By.id("menuUserLink")).getText(), userName);
 		testName = new Throwable().getStackTrace()[0].getMethodName();
 	}
 
@@ -95,21 +103,16 @@ public class CadastrarClienteTeste {
 	public void validarBotaoRegistrarDesabilitadoSemDadosPreenchidos() throws Exception {
 		telaInicial.ClicarEmCriarNovaConta();
 		js = (JavascriptExecutor) driver;
-        js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 1000);");
+		js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 1000);");
 		formulario.ClicarEmAceitarTermos();
 		assertFalse(formulario.verificarSeRegistrarEstaDisponivel());
-	   testName = new Throwable().getStackTrace()[0].getMethodName();
-	   logger = extensao.createTest("Botao desabilitado!");
+		testName = new Throwable().getStackTrace()[0].getMethodName();
+		logger = extensao.createTest("Botao desabilitado!");
 	}
 
 	@AfterMethod
 	public void finaliza(ITestResult resultado) throws IOException {
-//		if (resultado.getStatus() == ITestResult.FAILURE) {
-//			String tempo = ScreenshotUtils.getScreenshot(driver, testName );
-//			logger.fail(resultado.getThrowable().getMessage(),
-//					MediaEntityBuilder.createScreenCaptureFromPath(tempo).build());
-//		} else 
-			if (resultado.getStatus() == ITestResult.SUCCESS) {
+		if (resultado.getStatus() == ITestResult.SUCCESS) {
 			String tempo = ScreenshotUtils.getScreenshot(driver, testName);
 			logger.pass(testName, MediaEntityBuilder.createScreenCaptureFromPath(tempo).build());
 		}
@@ -117,4 +120,3 @@ public class CadastrarClienteTeste {
 		fecharDriver();
 	}
 }
-
