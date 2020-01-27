@@ -14,7 +14,7 @@ public class TelaInicialPage {
 
 	final WebDriver driver;
 
-	@FindBy(how = How.ID, using = "menuUser")
+	@FindBy(how = How.ID, using = "menuUserLink")
 	private WebElement lnkUser;
 
 	@FindBy(how = How.LINK_TEXT, using = "CREATE NEW ACCOUNT")

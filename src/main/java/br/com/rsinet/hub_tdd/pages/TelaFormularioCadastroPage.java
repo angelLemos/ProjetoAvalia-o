@@ -94,7 +94,8 @@ public class TelaFormularioCadastroPage {
 	}
 
 	public void selecionaPais(String pais) throws IOException, InterruptedException {
-		Thread.sleep(2000);
+		js = (JavascriptExecutor) driver;
+		js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 2000);");
 		cbxPais.sendKeys(pais);
 	}
 

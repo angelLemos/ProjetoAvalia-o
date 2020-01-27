@@ -16,13 +16,13 @@ public class ExcelDadosConfig {
 
 //Este método é definir o caminho do arquivo e abrir o arquivo do Excel, passar o caminho do Excel e o nome da folha como argumentos para este método
 
-	public static void setExcelFile(String caminhoDoArquivo, String nomeDoArquivo) throws Exception {
+	public static void setExcelFile(String nomeDoArquivo) throws Exception {
 
 		try {
 
 			// Abre o arquivo do Excel
 
-			FileInputStream ExcelFile = new FileInputStream(caminhoDoArquivo);
+			FileInputStream ExcelFile = new FileInputStream("target/Excel/dados.xlsx");
 
 			// Acessa a folha de dados de teste necessária
 

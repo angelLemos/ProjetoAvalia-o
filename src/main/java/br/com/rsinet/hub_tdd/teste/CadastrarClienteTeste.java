@@ -13,31 +13,39 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.MediaEntityBuilder;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
 import br.com.rsinet.hub_tdd.pages.TelaFormularioCadastroPage;
 import br.com.rsinet.hub_tdd.pages.TelaInicialPage;
 import br.com.rsinet.hub_tdd.utils.ExcelDadosConfig;
-import br.com.rsinet.hub_tdd.utils.ScreenshotUtils;
+import br.com.rsinet.hub_tdd.utils.MassaDeDados;
+import br.com.rsinet.hub_tdd.utils.ReportConfig;
 
 public class CadastrarClienteTeste {
 
 	WebDriver driver;
 	ExtentReports extensao;
-	ExtentTest logger;
+	ExtentTest test;
 	JavascriptExecutor js;
 
 	TelaInicialPage telaInicial;
 
 	TelaFormularioCadastroPage formulario;
-	private String testName;
+	private MassaDeDados excel;
+	
 
+	
+	@BeforeTest
+	public void setConfigReport() {
+		/*setando o reporte e enviando a string definindo o nome do arquivo report deste teste*/
+		ReportConfig.setReport();
+	}
 	@BeforeMethod
 	public void Inicializa() throws Exception {
 
@@ -46,77 +54,66 @@ public class CadastrarClienteTeste {
 		telaInicial = PageFactory.initElements(driver, TelaInicialPage.class);
 
 		formulario = PageFactory.initElements(driver, TelaFormularioCadastroPage.class);
-
-		ExcelDadosConfig.setExcelFile("target/Excel/dados.xlsx", "Planilha1");
-
+		ExcelDadosConfig.setExcelFile("Planilha1");
+		
+		excel = new MassaDeDados();
+		
 	}
 
 	@Test
 	public void testeSucessoCadastrarCliente() throws Exception {
 
-		String userName = ExcelDadosConfig.getCellData(1, 0);
-		String email = ExcelDadosConfig.getCellData(1, 1);
-		String senha = ExcelDadosConfig.getCellData(1, 2);
-		String confirmSenha = ExcelDadosConfig.getCellData(1, 3);
-
-		String nome = ExcelDadosConfig.getCellData(1, 4);
-		String sobrenome = ExcelDadosConfig.getCellData(1, 5);
-		String telefone = ExcelDadosConfig.getCellData(1, 6);
-		String pais = ExcelDadosConfig.getCellData(1, 7);
-		String cidade = ExcelDadosConfig.getCellData(1, 8);
-		String endereco = ExcelDadosConfig.getCellData(1, 9);
-		String estado = ExcelDadosConfig.getCellData(1, 10);
-		String cep = ExcelDadosConfig.getCellData(1, 11);
-
-		ExtentHtmlReporter reporte = new ExtentHtmlReporter("./Reports/formularioTestes.html");
-
-		extensao = new ExtentReports();
-
-		extensao.attachReporter(reporte);
-
-		logger = extensao.createTest("Cadastro Realizado!");
 
 		telaInicial.clicarEmMenuUsuario();
 		telaInicial.ClicarEmCriarNovaConta();
-		formulario.insereNomeUsuario(userName);
-		formulario.insereEmail(email);
-		formulario.insereSenha(senha);
-		formulario.confirmaSenha(confirmSenha);
-		formulario.insereNome(nome);
-		formulario.insereSobrenome(sobrenome);
-		formulario.insereTelefone(telefone);
-		formulario.selecionaPais(pais);
-		formulario.insereCidade(cidade);
-		formulario.insereEndereco(endereco);
-		formulario.insereEstado(estado);
-		formulario.insereCEP(cep);
+		formulario.insereNomeUsuario(excel.getUserName());
+		formulario.insereEmail(excel.getEmail());
+		formulario.insereSenha(excel.getSenha());
+		formulario.confirmaSenha(excel.getConfirmarSenha());
+		formulario.insereNome(excel.getNome());
+		formulario.insereSobrenome(excel.getSobrenome());
+		formulario.insereTelefone(excel.getTelefone());
+		formulario.selecionaPais(excel.getPais());
+		formulario.insereCidade(excel.getCidade());
+		formulario.insereEndereco(excel.getEndereco());
+		formulario.insereEstado(excel.getEstado());
+		formulario.insereCEP(excel.getCEP());
 		formulario.ClicarEmAceitarTermos();
 		formulario.ClicarEmRegistrar();
 		js = (JavascriptExecutor) driver;
-		js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 1000);");
-		assertEquals(driver.findElement(By.id("menuUserLink")).getText(), userName);
-		testName = new Throwable().getStackTrace()[0].getMethodName();
+		js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 2000);");
+		assertEquals(driver.findElement(By.id("menuUserLink")).getText(), excel.getUserName());
+		/*definindo teste para o report*/
+		test = ReportConfig.createTest("SucessoCadastrarCliente");
 	}
 
 	@Test
 	// Teste de validação do botao registrar desabilitado sem dados preenchidos
 	public void validarBotaoRegistrarDesabilitadoSemDadosPreenchidos() throws Exception {
+		js = (JavascriptExecutor) driver;
+		js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 3000);");
+		telaInicial.clicarEmMenuUsuario();
 		telaInicial.ClicarEmCriarNovaConta();
 		js = (JavascriptExecutor) driver;
-		js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 1000);");
+		js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 3000);");
 		formulario.ClicarEmAceitarTermos();
 		assertFalse(formulario.verificarSeRegistrarEstaDisponivel());
-		testName = new Throwable().getStackTrace()[0].getMethodName();
-		logger = extensao.createTest("Botao desabilitado!");
+
+		/*definindo teste para o report*/
+		test = ReportConfig.createTest("validarBotaoRegistrarDesabilitado");
 	}
 
 	@AfterMethod
-	public void finaliza(ITestResult resultado) throws IOException {
-		if (resultado.getStatus() == ITestResult.SUCCESS) {
-			String tempo = ScreenshotUtils.getScreenshot(driver, testName);
-			logger.pass(testName, MediaEntityBuilder.createScreenCaptureFromPath(tempo).build());
-		}
-		extensao.flush();
+	public void finaliza(ITestResult result) throws IOException {
+		/*condição para definir o status do teste no report*/
+		ReportConfig.statusReported(test, result, driver);
+
+		/*fechando*/
 		fecharDriver();
+	}
+	
+	@AfterTest
+	public void finalizaReport() {
+		ReportConfig.quitExtent();
 	}
 }
