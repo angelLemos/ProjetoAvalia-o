@@ -8,7 +8,6 @@ import static org.testng.Assert.assertFalse;
 import java.io.IOException;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -21,7 +20,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 
 import br.com.rsinet.hub_tdd.pages.TelaFormularioCadastroPage;
@@ -32,14 +30,11 @@ import br.com.rsinet.hub_tdd.utils.ReportConfig;
 
 public class CadastrarClienteTeste {
 
-	WebDriver driver;
-	ExtentReports extensao;
-	ExtentTest test;
-	JavascriptExecutor js;
-	WebDriverWait wait;
-	TelaInicialPage telaInicial;
-
-	TelaFormularioCadastroPage formulario;
+	private WebDriver driver;
+	private ExtentTest test;
+	private WebDriverWait wait;
+	private TelaInicialPage telaInicial;
+	private TelaFormularioCadastroPage formulario;
 	private MassaDeDados excel;
 	
 
@@ -89,9 +84,6 @@ public class CadastrarClienteTeste {
 		formulario.ClicarEmAceitarTermos();
 		formulario.ClicarEmRegistrar();
 		
-		//Utilizando tempo para aguardar a pagina de logado para realizar o assert
-//		js = (JavascriptExecutor) driver;
-//		js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 2000);");
 		wait.until(ExpectedConditions.urlToBe("http://www.advantageonlineshopping.com/#/"));
 		WebElement element = driver.findElement(By.xpath("//*[@id=\"menuUserLink\"]/span"));
 		wait.until(ExpectedConditions.visibilityOf(element));

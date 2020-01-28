@@ -18,7 +18,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 
 import br.com.rsinet.hub_tdd.pages.TelaInicialPage;
@@ -26,13 +25,12 @@ import br.com.rsinet.hub_tdd.pages.TelaListaProdutosPage;
 import br.com.rsinet.hub_tdd.utils.ReportConfig;
 
 public class ConsultarProdutoLupaTeste {
-	static WebDriver driver;
+	private WebDriver driver;
 
-	TelaInicialPage telaInicial;
-	TelaListaProdutosPage telaListaProdutos;
-	ExtentReports extensao;
-	ExtentTest test;
-	JavascriptExecutor js;
+	private TelaInicialPage telaInicial;
+	private TelaListaProdutosPage telaListaProdutos;
+	private ExtentTest test;
+	private JavascriptExecutor js;
 
 
 	@BeforeTest
