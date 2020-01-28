@@ -109,16 +109,16 @@ public class CadastrarClienteTeste {
 		formulario.ClicarEmAceitarTermos();
 		assertFalse(formulario.verificarSeRegistrarEstaDisponivel());
 
-		/*definindo teste para o report*/
+		//definindo teste para o report
 		test = ReportConfig.createTest("validarBotaoRegistrarDesabilitado");
 	}
 
 	@AfterMethod
 	public void finaliza(ITestResult result) throws IOException {
-		/*condição para definir o status do teste no report*/
+		//condição para definir o status do teste no report
 		ReportConfig.statusReported(test, result, driver);
 
-		/*fechando*/
+		//fechando
 		fecharDriver();
 	}
 	

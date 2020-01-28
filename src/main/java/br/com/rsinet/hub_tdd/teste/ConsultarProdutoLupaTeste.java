@@ -37,7 +37,7 @@ public class ConsultarProdutoLupaTeste {
 
 	@BeforeTest
 	public void setConfigReport() {
-		/*setando o reporte e enviando a string definindo o nome do arquivo report deste teste*/
+		// setando o reporte e enviando a string definindo o nome do arquivo report deste teste
 		ReportConfig.setReport();
 	}
 	
@@ -80,10 +80,10 @@ public class ConsultarProdutoLupaTeste {
 
 	@AfterMethod
 	public void finaliza(ITestResult result) throws IOException {
-		/*condição para definir o status do teste no report*/
+		//condição para definir o status do teste no report
 		ReportConfig.statusReported(test, result, driver);
 
-		/*fechando*/
+		//fechando
 		fecharDriver();
 	}
 	

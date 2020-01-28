@@ -13,7 +13,6 @@ import org.openqa.selenium.JavascriptExecutor;
 //import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -22,7 +21,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 
 import br.com.rsinet.hub_tdd.pages.TelaInicialPage;
@@ -34,10 +32,9 @@ public class ConsultaProdutoTelaTeste {
 
 	private TelaInicialPage telaInicial;
 	private TelaListaProdutosPage telaListaProdutos;
-	private ExtentReports extensao;
 	private ExtentTest test;
 	private JavascriptExecutor js;
-	private WebDriverWait wait;
+	//private WebDriverWait wait;
 	
 
 	@BeforeTest

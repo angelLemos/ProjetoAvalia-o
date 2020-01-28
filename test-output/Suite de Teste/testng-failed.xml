@@ -3,15 +3,15 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Suite de Teste]">
   <test thread-count="5" name="Automacao utilizando TDD(failed)">
     <classes>
-      <class name="br.com.rsinet.hub_tdd.teste.ConsultaProdutoTelaTeste">
+      <class name="br.com.rsinet.hub_tdd.teste.CadastrarClienteTeste">
         <methods>
-          <include name="finaliza"/>
           <include name="finalizaReport"/>
+          <include name="finaliza"/>
           <include name="Inicializa"/>
-          <include name="validarAberturaProdutoErrado"/>
           <include name="setConfigReport"/>
+          <include name="validarBotaoRegistrarDesabilitadoSemDadosPreenchidos"/>
         </methods>
-      </class> <!-- br.com.rsinet.hub_tdd.teste.ConsultaProdutoTelaTeste -->
+      </class> <!-- br.com.rsinet.hub_tdd.teste.CadastrarClienteTeste -->
     </classes>
   </test> <!-- Automacao utilizando TDD(failed) -->
 </suite> <!-- Failed suite [Suite de Teste] -->
