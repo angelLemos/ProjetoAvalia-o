@@ -51,6 +51,7 @@ public class TelaInicialPage {
 	}
 	
 	public void ClicaEmNotebookTelaInicial() {
+		// clica em notebook da tela inicial, para verificar abertura de outro produto
 		txtSelecionaProdutoDaTela.click();
 	}
 
