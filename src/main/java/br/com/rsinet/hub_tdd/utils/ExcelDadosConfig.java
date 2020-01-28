@@ -22,7 +22,7 @@ public class ExcelDadosConfig {
 
 			// Abre o arquivo do Excel
 
-			FileInputStream ExcelFile = new FileInputStream("target/Excel/dados.xlsx");
+			FileInputStream ExcelFile = new FileInputStream("C:\\Users\\angelica.jesus\\Desktop\\dados.xlsx");
 
 			// Acessa a folha de dados de teste necessária
 
