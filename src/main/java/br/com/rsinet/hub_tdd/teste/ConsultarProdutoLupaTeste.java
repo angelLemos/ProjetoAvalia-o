@@ -10,6 +10,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -31,6 +33,7 @@ public class ConsultarProdutoLupaTeste {
 	private TelaListaProdutosPage telaListaProdutos;
 	private ExtentTest test;
 	private JavascriptExecutor js;
+	private WebDriverWait wait;
 
 
 	@BeforeTest
@@ -55,9 +58,11 @@ public class ConsultarProdutoLupaTeste {
 		
 		telaInicial.inserirProduto("Laptops");
 		telaListaProdutos.SelecionarProdutoDoCampo();
-		js = (JavascriptExecutor) driver;
-        js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 1000);");
-		Assert.assertEquals("http://www.advantageonlineshopping.com/#/product/11?viewAll=Laptops", driver.getCurrentUrl());
+		wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[3]/section/article[1]/div[2]/div[2]/h1")));
+        String textoElement = driver.findElement(By.xpath("/html/body/div[3]/section/article[1]/div[2]/div[2]/h1")).getText();
+		assertEquals(textoElement, "HP PAVILION X360 - 11T TOUCH LAPTOP");
+
 		test = ReportConfig.createTest("pesquisaProdutoCampo");
 	}
 	
@@ -66,12 +71,15 @@ public class ConsultarProdutoLupaTeste {
 
 		telaInicial.clicarNaLupa();
 		telaInicial.inserirProduto("smartphones");
+	
+		//Só tira a screenshot corretamente com o tempo 
 		js = (JavascriptExecutor) driver;
 		js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 2000);");
-		
-		String textoElement = driver.findElement(By.xpath("/html[1]/body[1]/div[3]/section[1]/article[1]/div[3]/div[1]/label[1]/span[1]")).getText();
-		assertEquals(textoElement, "No results for \"smartphones\"");
-		
+	
+//		wait = new WebDriverWait(driver, 10);
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html[1]/body[1]/div[3]/section[1]/article[1]/div[3]/div[1]/label[1]/span[1]")));	
+        Assert.assertTrue(driver.getPageSource().contains("No results for \"smartphones\""));
+      	
 		test = ReportConfig.createTest("pesquisarProdutoInexistente");
 		
 	}

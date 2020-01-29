@@ -7,7 +7,6 @@ import static org.testng.Assert.assertEquals;
 import java.io.IOException;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 //import org.junit.After;
 //import org.junit.Before;
 //import org.junit.Test;
@@ -35,7 +34,6 @@ public class ConsultaProdutoTelaTeste {
 	private TelaInicialPage telaInicial;
 	private TelaListaProdutosPage telaListaProdutos;
 	private ExtentTest test;
-	private JavascriptExecutor js;
 	private WebDriverWait wait;
 	
 
@@ -65,8 +63,7 @@ public class ConsultaProdutoTelaTeste {
 		Assert.assertEquals(driver.getCurrentUrl(), "http://www.advantageonlineshopping.com/#/product/31");
 		wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html[1]/body[1]/div[3]/section[1]/article[1]/div[2]/div[2]/h1[1]")));
-//		js = (JavascriptExecutor) driver;
-//        js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 1000);");
+
         test = ReportConfig.createTest("pesquisaProdutoTela");
       
 	}

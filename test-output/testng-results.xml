@@ -1,59 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
+<testng-results skipped="0" failed="0" ignored="1" total="2" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="34136" started-at="2020-01-28T13:53:08 BRST" finished-at="2020-01-28T13:53:43 BRST">
+  <suite name="Default suite" duration-ms="14328" started-at="2020-01-28T22:14:15 BRST" finished-at="2020-01-28T22:14:29 BRST">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="34136" started-at="2020-01-28T13:53:08 BRST" finished-at="2020-01-28T13:53:43 BRST">
-      <class name="br.com.rsinet.hub_tdd.teste.CadastrarClienteTeste">
-        <test-method status="PASS" signature="setConfigReport()[pri:0, instance:br.com.rsinet.hub_tdd.teste.CadastrarClienteTeste@e320068]" name="setConfigReport" is-config="true" duration-ms="73" started-at="2020-01-28T13:53:08 BRST" finished-at="2020-01-28T13:53:09 BRST">
+    <test name="Default test" duration-ms="14328" started-at="2020-01-28T22:14:15 BRST" finished-at="2020-01-28T22:14:29 BRST">
+      <class name="br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste">
+        <test-method status="PASS" signature="setConfigReport()[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste@76f2b07d]" name="setConfigReport" is-config="true" duration-ms="68" started-at="2020-01-28T22:14:15 BRST" finished-at="2020-01-28T22:14:15 BRST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setConfigReport -->
-        <test-method status="PASS" signature="Inicializa()[pri:0, instance:br.com.rsinet.hub_tdd.teste.CadastrarClienteTeste@e320068]" name="Inicializa" is-config="true" duration-ms="11301" started-at="2020-01-28T13:53:09 BRST" finished-at="2020-01-28T13:53:20 BRST">
+        <test-method status="PASS" signature="Inicializa()[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste@76f2b07d]" name="Inicializa" is-config="true" duration-ms="10803" started-at="2020-01-28T22:14:15 BRST" finished-at="2020-01-28T22:14:26 BRST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Inicializa -->
-        <test-method status="PASS" signature="testeSucessoCadastrarCliente()[pri:0, instance:br.com.rsinet.hub_tdd.teste.CadastrarClienteTeste@e320068]" name="testeSucessoCadastrarCliente" duration-ms="8048" started-at="2020-01-28T13:53:20 BRST" finished-at="2020-01-28T13:53:28 BRST">
+        <test-method status="PASS" signature="pesquisarProdutoInexistente()[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste@76f2b07d]" name="pesquisarProdutoInexistente" duration-ms="2319" started-at="2020-01-28T22:14:26 BRST" finished-at="2020-01-28T22:14:28 BRST">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testeSucessoCadastrarCliente -->
-        <test-method status="PASS" signature="finaliza(org.testng.ITestResult)[pri:0, instance:br.com.rsinet.hub_tdd.teste.CadastrarClienteTeste@e320068]" name="finaliza" is-config="true" duration-ms="1404" started-at="2020-01-28T13:53:28 BRST" finished-at="2020-01-28T13:53:29 BRST">
+        </test-method> <!-- pesquisarProdutoInexistente -->
+        <test-method status="PASS" signature="finaliza(org.testng.ITestResult)[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste@76f2b07d]" name="finaliza" is-config="true" duration-ms="906" started-at="2020-01-28T22:14:28 BRST" finished-at="2020-01-28T22:14:29 BRST">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=testeSucessoCadastrarCliente status=SUCCESS method=CadastrarClienteTeste.testeSucessoCadastrarCliente()[pri:0, instance:br.com.rsinet.hub_tdd.teste.CadastrarClienteTeste@e320068] output={null}]]]>
+                <![CDATA[[TestResult name=pesquisarProdutoInexistente status=SUCCESS method=ConsultarProdutoLupaTeste.pesquisarProdutoInexistente()[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste@76f2b07d] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- finaliza -->
-        <test-method status="PASS" signature="Inicializa()[pri:0, instance:br.com.rsinet.hub_tdd.teste.CadastrarClienteTeste@e320068]" name="Inicializa" is-config="true" duration-ms="10152" started-at="2020-01-28T13:53:29 BRST" finished-at="2020-01-28T13:53:39 BRST">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- Inicializa -->
-        <test-method status="PASS" signature="validarBotaoRegistrarDesabilitadoSemDadosPreenchidos()[pri:0, instance:br.com.rsinet.hub_tdd.teste.CadastrarClienteTeste@e320068]" name="validarBotaoRegistrarDesabilitadoSemDadosPreenchidos" duration-ms="1889" started-at="2020-01-28T13:53:39 BRST" finished-at="2020-01-28T13:53:41 BRST">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- validarBotaoRegistrarDesabilitadoSemDadosPreenchidos -->
-        <test-method status="PASS" signature="finaliza(org.testng.ITestResult)[pri:0, instance:br.com.rsinet.hub_tdd.teste.CadastrarClienteTeste@e320068]" name="finaliza" is-config="true" duration-ms="1037" started-at="2020-01-28T13:53:41 BRST" finished-at="2020-01-28T13:53:42 BRST">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=validarBotaoRegistrarDesabilitadoSemDadosPreenchidos status=SUCCESS method=CadastrarClienteTeste.validarBotaoRegistrarDesabilitadoSemDadosPreenchidos()[pri:0, instance:br.com.rsinet.hub_tdd.teste.CadastrarClienteTeste@e320068] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- finaliza -->
-        <test-method status="PASS" signature="finalizaReport()[pri:0, instance:br.com.rsinet.hub_tdd.teste.CadastrarClienteTeste@e320068]" name="finalizaReport" is-config="true" duration-ms="207" started-at="2020-01-28T13:53:42 BRST" finished-at="2020-01-28T13:53:43 BRST">
+        <test-method status="PASS" signature="finalizaReport()[pri:0, instance:br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste@76f2b07d]" name="finalizaReport" is-config="true" duration-ms="204" started-at="2020-01-28T22:14:29 BRST" finished-at="2020-01-28T22:14:29 BRST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- finalizaReport -->
-      </class> <!-- br.com.rsinet.hub_tdd.teste.CadastrarClienteTeste -->
+      </class> <!-- br.com.rsinet.hub_tdd.teste.ConsultarProdutoLupaTeste -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
